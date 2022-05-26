@@ -6,7 +6,7 @@
 from turtle import color
 from PIL import Image
 import matplotlib.pyplot as plt
-import histogram_equalizar as hteq
+import histogram_equalizer as hteq
 
 image = Image.open('gonzalezWoods_3_10.png').convert('L')
 image.show()
@@ -19,8 +19,7 @@ plt.figure(0)
 for i in range(len(histogram)):
     plt.bar(i, histogram[i], color = (0,0,0))
 
-equalized_map = hteq.equalize_hist(histogram, size)
-new_image = image.point(lambda p : hteq.pxl_map_eq_hist(p, equalized_map))
+new_image = hteq.hist_equalize(image, histogram)
 
 new_hist = new_image.histogram()
 plt.figure(1)

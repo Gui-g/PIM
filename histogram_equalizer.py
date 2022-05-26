@@ -1,7 +1,9 @@
+from PIL import Image
+
 def pxl_map_eq_hist(pxl_val, eq_map):
     return eq_map[pxl_val]
 
-def equalize_hist(histogram, size):
+def equalize_map(histogram, size):
     #nk/n
     normalized_hist = list()
     for i in histogram:
@@ -22,3 +24,10 @@ def equalize_hist(histogram, size):
         rounded.append(equalized)
 
     return rounded
+
+def hist_equalize(image, histogram):
+    width, height = image.size
+    size = width*height
+    map = equalize_map(histogram, size)
+    new_image = image.point(lambda p : pxl_map_eq_hist(p, map))
+    return new_image
