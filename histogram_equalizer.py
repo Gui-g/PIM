@@ -25,9 +25,7 @@ def equalize_map(histogram, size):
 
     return rounded
 
-def hist_equalize(image, histogram):
-    width, height = image.size
-    size = width*height
+def hist_equalize(image, histogram, size):
     map = equalize_map(histogram, size)
     new_image = image.point(lambda p : pxl_map_eq_hist(p, map))
     return new_image

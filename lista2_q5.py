@@ -19,7 +19,7 @@ plt.figure(0)
 for i in range(len(histogram)):
     plt.bar(i, histogram[i], color = (0,0,0))
 
-new_image = hteq.hist_equalize(image, histogram)
+new_image = hteq.hist_equalize(image, histogram, size)
 
 new_hist = new_image.histogram()
 plt.figure(1)
