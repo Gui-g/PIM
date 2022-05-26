@@ -43,7 +43,6 @@ def connected_component(image : Image):
     height, width = image.size
     bordered = ImageOps.expand(image, 1, 0) #creates 1px border
     return_img = Image.new('L', (height+1, width+1)) #creates image for labeling
-    return_img = return_img.point(lambda p : 255 if p >= 1 else 0)
 
     width_range = range(1, width)
     height_range = range(1, height)
@@ -114,6 +113,7 @@ def filter_image(lbl_image : Image, pxl_list):
 
 image = Image.open("Teste_quadsCircs_B.png")
 image = image.convert('L')
+image.show()
 
 threshold = 100
 image = image.point(lambda p : 255 if p >= 100 else 0)
