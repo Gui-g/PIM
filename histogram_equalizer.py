@@ -25,7 +25,25 @@ def equalize_map(histogram, size):
 
     return rounded
 
-def hist_equalize(image, histogram, size):
+def hist_equalize(image, histogram):
+    height, width = image.size
+    size = width * height
     map = equalize_map(histogram, size)
     new_image = image.point(lambda p : pxl_map_eq_hist(p, map))
+    return new_image
+
+def hist_equalize_rgb(image, histogram_r, histogram_b, histogram_g):
+    height, width = image.size
+    size = width * height
+    map_r = equalize_map(histogram_r, size)
+    map_b = equalize_map(histogram_b, size)
+    map_g = equalize_map(histogram_g, size)
+
+    new_image = Image.new(mode="RGB", size=(height, width))
+
+    for i in range(0, height):
+        for j in range(0, width):
+            r, g, b = image.getpixel((i,j))
+            new_image.putpixel((i,j), (pxl_map_eq_hist(r, map_r), pxl_map_eq_hist(g, map_g), pxl_map_eq_hist(b, map_b)))
+
     return new_image
